@@ -1,0 +1,129 @@
+html {
+    font-family: Helvetica;
+}
+
+.buttonFieldClass {
+    height: 18px;
+    width: 18px;
+    margin-right:5px;
+    border: 1px grey solid;
+}
+
+
+.btn-primary {
+    margin:3px;
+}
+
+/*#mineCount, #inputSize {
+    width:70px;
+}*/
+
+.viewField {
+    padding-right:0.8rem;
+}
+
+#msg2User {
+    padding-left:3em;
+    color:red;
+}
+
+.hline1 {
+    margin-top:0px;
+    border:2px grey solid;
+}
+
+.hline2, .comment {
+    margin-top:16px;
+    border:2px grey solid;
+}
+
+/*#t1ID {
+    width: 100%;
+    padding-left:5%;
+    background-color: azure;
+}*/
+
+/*#eingabeForm {
+    padding-left:5%;
+    background-color: azure;
+}*/
+
+#gameTable {
+    padding-left:5%;
+}
+
+
+#inputSize, #mineCount    {
+    width:25%;
+}
+
+#commentsTable {
+    margin-top: 2em;
+}
+
+#endImg {
+    width:"250px";
+    margin-left: 3em;
+}
+
+#playForm {
+    margin-bottom: 3rem;
+}
+
+label {
+    margin-right:2em;
+}
+
+#td1ID {
+    padding:0px;
+}
+
+header {
+    background-color: azure;
+}
+
+#chatHeaderID {
+    margin-top:3rem;
+}
+
+.page-footer {
+    font-size:10px;
+}
+
+footer {
+    margin-top:5%;
+}
+
+#logo {
+    display:none;
+}
+
+@media (min-width: 576px) {
+    #logo {
+        display:none;
+    }
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+
+@media (min-width: 768px) {
+    #logo {
+        display:block;
+    }
+}
+
+/* Large devices (desktops, 992px and up)*/
+
+@media (min-width: 992px) {
+    #logo {
+        display:block;
+    }
+}
+
+/*// Extra large devices (large desktops, 1200px and up)*/
+
+@media (min-width: 1200px) {
+    #logo {
+        display:block;
+    }
+}   

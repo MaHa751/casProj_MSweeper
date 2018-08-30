@@ -1,0 +1,130 @@
+<!--
+    *** PLEASE NOTE ***
+    You need to start the backendserver and the database before you can use 
+    the website with full functionality.
+
+    How to?
+    > Install MongoDB:  https://www.mongodb.com/download-center?jmp=nav#community
+    > Run the MongoDB:  cmd (as admin) -> "net start MongoDb"
+    > Run the backend:  cmd -> go to "./Backend/"   -> "node server.js"
+        Perhaps you need to install node.js, npm, etc. before you can start the backend
+-->
+
+
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Marcel Haas">
+    <meta name="description" content="Projektarbeit im Rahmen der Mastervorlesung Web Engineering am CAS. Umsetzung einer eigenen Version des bekannten Computerspiels Minesweeper.">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body onload="loadComments()">
+<!--<body>-->
+    <header>
+        <form id="eingabeForm" class="container">
+            <div class="row">
+                <h1 id=td1ID class="col-sm">Minesweeper Online Game</h1>
+
+                <a class="col-sm" id="logo" href="https://www.cas.dhbw.de" target="_blanc">
+                    <img src="https://www.cas.dhbw.de/typo3conf/ext/dhbw_cas/Resources/Public/Images/DHBW_CAS_logo.svg" height="80px" alt="CAS-Logo">
+                </a>
+            </div>
+
+            <div class="row">
+                <label for="inputSize">Spielfeldgröße </label>
+                <div id="inputSizeView" class="viewField">10</div>
+                <input type="range" class="custom-range" min=2 max=30 step=1 id="inputSize" value=10>
+            </div>
+
+            <div class="row">
+                <label for="mineCount">Mienenanzahl </label>
+                <div id="mineCountView" class="viewField">20</div>
+                <input type="range" class="custom-range" min=1 max=99 step=1 value=20 id="mineCount">
+            </div>
+
+            <div class="row">
+                <button type="button" id="createGameButton" class="btn btn-primary">Start</button>
+                <button type="button" id="stopGameButton" disabled class="btn btn-primary">Stop</button>
+                <button type="button" id="randomGameButton" class="btn btn-primary">Zufallsspiel</button>
+            </div>
+
+            <div class="row">
+                <label for="timer" id="labelForTimer"></label>
+                <div id="timer"></div>
+                <strong id="msg2User"></strong>
+            </div>
+        </form>
+    </header>
+
+    <main>
+        <hr class="hline1">
+
+        <div class="container">
+            <div class="row">
+                <form id="playForm">
+                    <!--Hier wird durch JS das Spielfeld eingefügt-->
+                    <table id="gameTable"></table>
+                </form>
+            </div>
+        </div>
+
+        <div id="comment">
+            <div class="container">
+                <h2 class="row" id="chatHeaderID">Öffentlicher Chat</h2>
+
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="userNameField">Nickname</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="userNameField" placeholder="Nickname" aria-describedby="inputGroupPrepend" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="commentField">Nachricht</label>
+                            <textarea class="form-control" id="commentField" placeholder="Geben Sie Ihre Nachricht ein" required></textarea>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="ratingField">Bewertung</label>
+                            <input type="range" class="custom-range" id="ratingField" min=1 max=5 step=1 required>
+                        </div>
+
+                        <button class="btn btn-primary" type="button" id="submitNewComment">Absenden</button>
+
+                    </div>
+                </form>
+
+                <div class="row">
+                    <table id="commentsTable" class="table table-striped">
+                        <tr>
+                            <th>User</th>
+                            <th>Nachricht</th>
+                            <th>Datum</th>
+                            <th>Bewertung</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            © 2018 by Marcel Haas
+        </div>
+    </div>
+</footer>
+
+</html>
