@@ -13,6 +13,11 @@ html {
     width:100%;
 }
 
+#msg2User {
+    padding-left:3em;
+    color:red;
+}
+
 #mineCount, #inputSize {
     width:70px;
 }

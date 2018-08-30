@@ -4,6 +4,8 @@ var maxVal;
 var lost;
 var size;
 var mineCnt;
+var fieldCnt2Win = 0;
+var fieldCnt2WinMax;
 var mineCountF = document.getElementById("mineCount");
 var inpSizeF = document.getElementById("inputSize");
 var stopB = document.getElementById("stopGameButton");
@@ -96,8 +98,9 @@ function checkInput() {
 }
 
 function startGame() {
-    document.getElementById("endImg").src = "";
-    document.getElementById("endImg").style.display = "none";
+    document.getElementById("msg2User").innerHTML = "";
+    document.getElementById("msg2User").style.display = "none";
+
     checkInput();
 }
 
@@ -137,8 +140,8 @@ function showAllMines(mines, withoutID) {
             }
         }
     }
-    document.getElementById("endImg").src = picLost;
-    document.getElementById("endImg").style.display = "inline-block";
+    document.getElementById("msg2User").innerHTML = "Leider verloren!  :(  Nächster Versuch?";
+    document.getElementById("msg2User").style.display = "inline-block";
     stopGame();
 }
 
@@ -157,10 +160,14 @@ function showAllEmptySpace(mines, fieldID2) {
                 if (pic == picCell) {
                     if (mines[z][s] == "") {
                         document.getElementById(newCheckField).src = picCell0;
+                        fieldCnt2Win++;
+                        if (fieldCnt2Win == fieldCnt2WinMax) gameWon();
                         showAllEmptySpace(mines, newCheckField);
                     } else if (mines[z][s] !== 0) {
                         var checkMineRet = checkMine(newCheckField, mines);
                         document.getElementById(newCheckField).src = picCellx + checkMineRet + ".gif";
+                        fieldCnt2Win++;
+                        if (fieldCnt2Win == fieldCnt2WinMax) gameWon();
                     }
                 }
             }
@@ -189,22 +196,28 @@ function stopGame() {
     inpSizeF.disabled=false;
 }
 
-
+function gameWon() {
+    document.getElementById("msg2User").innerHTML = "Gewonnen!  :)  Herzlichen Glückwunsch!";
+    document.getElementById("msg2User").style.display = "inline-block";
+    stopGame();
+}
 
 //Create a new Game
 function createGame(mines) {
 
     var lost = false;
-    var tBody = document.getElementById("gameTableBody");
+    fieldCnt2Win=0;
+    var tBody = document.getElementById("gameTable");
     var line = [];
+    fieldCnt2WinMax = size * size - mineCnt;    //How many fields must be clicked to win without hitting a mine
 
     //Stop and delete prior games
     stopGame();
-    document.getElementById("gameTableBody").innerHTML = "";
+    document.getElementById("gameTable").innerHTML = "";
 
     stopB.disabled = false;
-    mineCountF.disabled=true;
-    inpSizeF.disabled=true;
+    mineCountF.disabled = true;
+    inpSizeF.disabled = true;
 
     document.getElementById("createGameButton").innerHTML = "Neustart";
 
@@ -214,11 +227,11 @@ function createGame(mines) {
 
     for (var i = 0; i < size; i += 1) {
         for (var j = 0; j < size; j += 1) {
-            line[i].appendChild(document.createElement("img"));
-            line[i].children[j].src = picCell;
-            line[i].children[j].id = "b_" + i + "_" + j;
-            line[i].children[j].className = "buttonFieldClass";
-            line[i].children[j].addEventListener("click", function (ev) {
+            line[i].appendChild(document.createElement("td")).appendChild(document.createElement("img"));
+            line[i].children[j].children[0].src = picCell;
+            line[i].children[j].children[0].id = "b_" + i + "_" + j;
+            line[i].children[j].children[0].className = "buttonFieldClass";
+            line[i].children[j].children[0].addEventListener("click", function (ev) {
                 //console.log(this.id);
                 ev.preventDefault();
                 var checkMineRet = checkMine(this.id, mines);
@@ -230,13 +243,17 @@ function createGame(mines) {
                         lost = true;
                     } else if (checkMineRet == "") {
                         document.getElementById(this.id).src = picCell0;
+                        fieldCnt2Win++;
+                        if (fieldCnt2Win == fieldCnt2WinMax) gameWon();
                         showAllEmptySpace(mines, this.id);
                     } else {
                         document.getElementById(this.id).src = (picCellx + checkMineRet + ".gif");
+                        fieldCnt2Win++;
+                        if (fieldCnt2Win == fieldCnt2WinMax) gameWon();
                     }
                 }
             })
-            line[i].children[j].addEventListener("contextmenu", function (ev) {
+            line[i].children[j].children[0].addEventListener("contextmenu", function (ev) {
                 ev.preventDefault();
                 if (document.getElementById(this.id).src == picCell) {
                     document.getElementById(this.id).src = picCellFlag;
